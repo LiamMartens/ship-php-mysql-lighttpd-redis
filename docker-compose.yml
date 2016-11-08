@@ -1,0 +1,64 @@
+version: '2'
+services:
+    mysql:
+        build: mysql
+        environment:
+            - TIMEZONE=UTC
+            - MYSQL_PORT=1024
+        ports:
+            - 1024:1024
+        volumes:
+            - ./files/mysql/conf:/etc/mysql
+            - ./files/mysql/data:/var/lib/mysql
+        tty: true
+        stdin_open: true
+    redis:
+        build: redis
+        environment:
+            - TIMEZONE=UTC
+            - REDIS_PORT=1027
+        ports:
+            - 1027:1027
+        volumes:
+            - ./files/redis/conf:/etc/redis
+            - ./files/redis/log:/var/log/redis
+            - ./files/redis/data:/var/lib/redis
+            - ./files/www:/var/www
+        tty: true
+        stdin_open: true
+    php:
+        build: php
+        environment:
+            - TIMEZONE=UTC
+            - PHP_PORT=1025
+            - PHP_MEMORY_LIMIT=64M
+            - PHP_UPLOAD_MAX_FILESIZE=15M
+            - PHP_MAX_FILE_UPLOADS=10
+            - PHP_POST_MAX_SIZE=45M
+        ports:
+            - 1025:1025
+        volumes: 
+            - ./files/php/conf:/etc/php7
+            - ./files/php/log:/var/log/php7
+            - ./files/www:/var/www
+        depends_on:
+            - mysql
+            - redis
+        tty: true
+        stdin_open: true
+    lighttpd:
+        build: lighttpd
+        environment: 
+            - TIMEZONE=UTC
+            - HTTP_PORT=1026
+            - PHP_PORT=1025
+            - CONFIG_FILE=lighttpd.conf
+        ports:
+            - 1026:1026
+        volumes:
+            - ./files/lighttpd:/etc/lighttpd
+            - ./files/www:/var/www
+        depends_on:
+            - php
+        tty: true
+        stdin_open: true
