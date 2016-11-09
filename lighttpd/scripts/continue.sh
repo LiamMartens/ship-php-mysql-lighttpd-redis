@@ -1,4 +1,6 @@
 #!/bin/bash
+export HOME=/home/www-data
+
 if [ -z "$HTTP_PORT" ]; then
     # not 80 as it is supposed to be run behind a reverse proxy and without root
     export HTTP_PORT=1026

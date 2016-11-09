@@ -1,4 +1,6 @@
 #!/bin/bash
+export HOME=/home/www-data
+
 if [ -z "$PHP_PORT" ]; then
 	export PHP_PORT=9000
 fi

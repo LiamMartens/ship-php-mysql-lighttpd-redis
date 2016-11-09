@@ -1,4 +1,6 @@
 #!/bin/bash
+export HOME=/home/mysql
+
 if [ -z "$MYSQL_PORT" ]; then
 	export MYSQL_PORT=1024
 fi
