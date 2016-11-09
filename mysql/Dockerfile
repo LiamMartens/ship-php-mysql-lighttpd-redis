@@ -29,10 +29,7 @@ VOLUME ["/var/lib/mysql", "/etc/mysql"]
 # copy run file
 COPY scripts/run.sh /home/mysql/run.sh
 RUN chmod +x /home/mysql/run.sh
+COPY scripts/continue.sh /home/mysql/continue.sh
+RUN chmod +x /home/mysql/continue.sh
 
-# set workdir and user
-USER mysql
-WORKDIR /home/mysql
-
-ENTRYPOINT ["/home/mysql/run.sh"]
-CMD ["/bin/bash"]
+ENTRYPOINT ["/home/www-data/run.sh", "su", "-m", "mysql", "-c", "/home/www-data/continue.sh /bin/bash"]

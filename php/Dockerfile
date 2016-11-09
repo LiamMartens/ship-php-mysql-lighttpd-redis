@@ -70,10 +70,7 @@ VOLUME ["/etc/php7", "/var/log/php7", "/var/www"]
 # copy run file
 COPY scripts/run.sh /home/www-data/run.sh
 RUN chmod +x /home/www-data/run.sh
+COPY scripts/continue.sh /home/www-data/continue.sh
+RUN chmod +x /home/www-data/continue.sh
 
-# set workdir and user
-USER www-data
-WORKDIR /home/www-data
-
-ENTRYPOINT ["/home/www-data/run.sh"]
-CMD ["/bin/bash"]
+ENTRYPOINT ["/home/www-data/run.sh", "su", "-m", "www-data", "-c", "/home/www-data/continue.sh /bin/bash"]
