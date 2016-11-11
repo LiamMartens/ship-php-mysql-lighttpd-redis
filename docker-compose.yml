@@ -23,7 +23,7 @@ services:
             - ./files/redis/conf:/etc/redis
             - ./files/redis/log:/var/log/redis
             - ./files/redis/data:/var/lib/redis
-            - /Volumes/CaseDisk/www/website:/var/www
+            - /var/www:/var/www
         tty: true
         stdin_open: true
     php:
@@ -40,7 +40,7 @@ services:
         volumes: 
             - ./files/php/conf:/etc/php7
             - ./files/php/log:/var/log/php7
-            - /Volumes/CaseDisk/www/website:/var/www
+            - /var/www:/var/www
         depends_on:
             - mysql
             - redis
@@ -57,7 +57,7 @@ services:
             - 127.0.0.1:1026:1026
         volumes:
             - ./files/lighttpd:/etc/lighttpd
-            - /Volumes/CaseDisk/www/website:/var/www
+            - /var/www:/var/www
         depends_on:
             - php
         tty: true
