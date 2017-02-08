@@ -41,9 +41,6 @@ perl -pi -e "s/listen\s*=\s*(.+):.+/listen = $PHP_TCP:$PHP_PORT/gi" /etc/php7/ph
 # set timezone
 perl -pi -e "s/;*date.timezone\s*=.*/date.timezone = $TIMEZONE/gi" /etc/php7/php.ini
 
-echo "Starting Directus handler"
-php7 /var/www/workbench directus --start > /dev/null &
-
 echo "Starting PHP FPM on $PHP_PORT"
 php-fpm7
 
