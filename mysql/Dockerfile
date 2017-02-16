@@ -13,7 +13,7 @@ RUN apk add --update --no-cache \
     sudo nano htop perl
 
 # add mysql
-RUN apk add --update --no-cache mysql mysql-client
+RUN apk add --update --no-cache mariadb mariadb-client
 
 # purge and re-create /var/lib/mysql with appropriate ownership
 RUN mkdir -p /var/lib/mysql /run/mysqld && \
