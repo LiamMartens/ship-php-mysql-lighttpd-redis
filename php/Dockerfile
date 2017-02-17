@@ -11,11 +11,11 @@ RUN adduser -D www-data
 RUN apk update && apk upgrade
 
 # add packages
-RUN apk add tzdata bash wget curl sudo nano htop perl
+RUN apk add --update tzdata bash wget curl sudo nano htop perl
 
 # install php 7
 ENV PHPV=7
-RUN apk add \
+RUN apk add --update \
     php$PHPV-mcrypt \
     php$PHPV-soap \
     php$PHPV-openssl \
