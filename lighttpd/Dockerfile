@@ -8,13 +8,10 @@ RUN adduser -D www-data
 RUN apk update && apk upgrade
 
 # add packages
-RUN apk add --update --no-cache \
-    tzdata bash wget curl pwgen \
-    sudo nano htop perl
+RUN apk add tzdata bash wget curl sudo nano htop perl
 
 # install lighttpd
-RUN apk add --update --no-cache \
-    lighttpd lighttpd-mod_auth && \
+RUN apk add lighttpd lighttpd-mod_auth && \
     rm /etc/lighttpd/lighttpd.conf
 
 # create lighttpd directory

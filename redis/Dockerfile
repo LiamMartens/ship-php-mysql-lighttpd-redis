@@ -8,12 +8,10 @@ RUN adduser -D www-data
 RUN apk update && apk upgrade
 
 # add packages
-RUN apk add --update --no-cache \
-    tzdata bash wget curl pwgen \
-    sudo nano htop perl
+RUN apk add tzdata bash wget curl sudo nano htop perl
 
 # install redis
-RUN apk add --update --no-cache redis
+RUN apk add redis
 
 # create php directory
 RUN mkdir -p /etc/redis /var/log/redis /var/run/redis /var/www /var/lib/redis && \
